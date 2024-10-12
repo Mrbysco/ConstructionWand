@@ -14,7 +14,7 @@ import static thetadev.constructionwand.ConstructionWand.MODID;
 public record PacketQueryUndo(boolean undoPressed) implements CustomPacketPayload
 {
     public static final StreamCodec<FriendlyByteBuf, PacketQueryUndo> CODEC = CustomPacketPayload.codec(
-            PacketQueryUndo::write,
+            PacketQueryUndo::encode,
             PacketQueryUndo::new);
     public static final Type<PacketQueryUndo> ID = new Type<>(ResourceLocation.fromNamespaceAndPath(MODID, "query_undo"));
 
@@ -22,7 +22,7 @@ public record PacketQueryUndo(boolean undoPressed) implements CustomPacketPayloa
         this(buf.readBoolean());
     }
 
-    public void write(FriendlyByteBuf buf) {
+    public void encode(FriendlyByteBuf buf) {
         buf.writeBoolean(undoPressed);
     }
 
